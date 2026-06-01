@@ -98,7 +98,7 @@ jobs:
       - name: Build for ${{ matrix.platform_name }}
         run: |
           export PATH=/opt/homebrew/bin:$PATH
-          export JAVA_HOME=$JAVA_HOME_8_X64
+          export JAVA_HOME=$JAVA_HOME_8_ARM64
           export PATH=$JAVA_HOME/bin:$PATH
           export SLIMMED=1
           if [ "${{ matrix.platform_name }}" == "ios" ]; then
