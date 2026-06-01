@@ -43,7 +43,9 @@ jobs:
           distribution: 'zulu'
 
       - name: Install dependencies
-        run: brew install make
+        run: |
+          brew install make wget
+          brew install ldid --formula --head
 
       - name: Get gl4es latest commit hash
         id: gl4es-sha
