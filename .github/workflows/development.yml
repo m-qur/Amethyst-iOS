@@ -42,16 +42,9 @@ jobs:
           java-version: '8'
           distribution: 'zulu'
 
-      - name: Debug Java
-        run: |
-          echo "JAVA_HOME: $JAVA_HOME"
-          java -version
-          which java
-
       - name: Install dependencies
-        run: |
-          brew install make
-          
+        run: brew install make
+
       - name: Get gl4es latest commit hash
         id: gl4es-sha
         run: echo "sha=$(git ls-remote https://github.com/PojavLauncherTeam/gl4es-114-extra refs/heads/master | grep -io '^\S*')" >> $GITHUB_OUTPUT
@@ -99,15 +92,16 @@ jobs:
         run: |
           export PATH=/opt/homebrew/bin:$PATH
           export JAVA_HOME=$JAVA_HOME_8_ARM64
+          export BOOTJDK=$JAVA_HOME_8_ARM64/bin
           export PATH=$JAVA_HOME/bin:$PATH
           export SLIMMED=1
           if [ "${{ matrix.platform_name }}" == "ios" ]; then
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }}
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} BOOTJDK=$BOOTJDK
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1 BOOTJDK=$BOOTJDK
           elif [ "${{ matrix.platform_name }}" == "tvos" ]; then
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} TROLLSTORE_JIT_ENT=1 BOOTJDK=$BOOTJDK
           else
-            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }}
+            gmake -j$(sysctl -n hw.ncpu) dsym package PLATFORM=${{ matrix.platform }} BOOTJDK=$BOOTJDK
           fi
 
       - name: Upload regular ipa
