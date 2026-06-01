@@ -32,7 +32,8 @@ jobs:
           
       - name: Checkout repository
         uses: actions/checkout@main
-
+      - name: Install dependencies
+        run: brew install make
       - name: Checkout repository submodules
         run: git submodule update --init --recursive
 
