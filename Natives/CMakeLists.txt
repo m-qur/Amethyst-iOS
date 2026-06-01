@@ -206,3 +206,4 @@ set_target_properties(AngelAuraAmethyst PROPERTIES
   MACOSX_BUNDLE TRUE
   MACOSX_FRAMEWORK_IDENTIFIER org.cmake.ExecutableTarget
   MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_LIST_DIR}/Info.plist")
+target_link_options(AngelAuraAmethyst PRIVATE -Wl,-U,__UISolariumEnabled)
