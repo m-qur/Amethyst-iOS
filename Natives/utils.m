@@ -195,18 +195,7 @@ BOOL DeviceCanCreateRXMap(void) {
     return ret == 0;
 }
 BOOL DeviceHasTXM(void) {
-    DIR *d = opendir("/private/preboot");
-    if(!d) return NO;
-    struct dirent *dir;
-    char txmPath[PATH_MAX];
-    while ((dir = readdir(d)) != NULL) {
-        if(strlen(dir->d_name) == 96) {
-            snprintf(txmPath, sizeof(txmPath), "/private/preboot/%s/usr/standalone/firmware/FUD/Ap,TrustedExecutionMonitor.img4", dir->d_name);
-            break;
-        }
-    }
-    closedir(d);
-    return access(txmPath, F_OK) == 0;
+    return YES;
 }
 JITFlags DeviceGetJITFlags(BOOL refresh) {
     static JITFlags cachedFlags = 0;
