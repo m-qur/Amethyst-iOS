@@ -215,9 +215,7 @@ JITFlags DeviceGetJITFlags(BOOL refresh) {
         
         if (@available(iOS 26.0, *)) {
             cachedFlags |= JIT_FLAG_IS_IOS_26;
-            if (!DeviceCanCreateRXMap()) {
-                cachedFlags |= JIT_FLAG_FORCE_MIRRORED;
-            }
+            cachedFlags |= JIT_FLAG_FORCE_MIRRORED;
         }
         if (DeviceHasTXM()) {
             cachedFlags |= JIT_FLAG_HAS_TXM;
