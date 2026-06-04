@@ -217,9 +217,8 @@ JITFlags DeviceGetJITFlags(BOOL refresh) {
             cachedFlags |= JIT_FLAG_IS_IOS_26;
             cachedFlags |= JIT_FLAG_FORCE_MIRRORED;
         }
-        if (DeviceHasTXM()) {
-            cachedFlags |= JIT_FLAG_HAS_TXM;
-        }
+        cachedFlags |= JIT_FLAG_HAS_TXM;
+        
     });
     return cachedFlags;
 }
