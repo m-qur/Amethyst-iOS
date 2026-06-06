@@ -68,9 +68,7 @@ bool redirectFunctionDirect(char *name, void *patchAddr, void *target) {
 }
 // redirectFunction for iOS 26+ (TXM)
 bool redirectFunctionMirrored(char *name, void *patchAddr, void *target) {
-    if (DeviceHasJITFlags(JIT_FLAG_FORCE_MIRRORED | JIT_FLAG_HAS_TXM)) {
-        JIT26PrepareRegionForPatching(patchAddr, sizeof(patch));
-    }
+    JIT26PrepareRegionForPatching(patchAddr, sizeof(patch));
     // mirror `addr` (rx, JIT applied) to `mirrored` (rw)
     vm_address_t mirrored = 0;
     vm_prot_t cur_prot, max_prot;
